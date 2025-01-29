@@ -48,7 +48,7 @@ impl Client {
         }
     }
 
-    pub async fn query<P, I, R>(&self, subpath: P, input: I) -> Result<R>
+    pub async fn query<P, I, R>(&self, subpath: P, _input: I) -> Result<R>
     where
         P: AsRef<str>,
         I: Serialize,
@@ -60,13 +60,13 @@ impl Client {
             .join(subpath)
             .map_err(|e| anyhow::anyhow!("failed to parse url subpath: {}", e))?;
 
-        let data = serde_json::to_string(&input)?;
+        //let data = serde_json::to_string(&input)?;
 
         let req = self
             .client
             .get(url)
-            .query(&[("wg_variables", data)])
-            .query(&[("wg_app_hash", &self.application_hash)])
+          //  .query(&[("wg_variables", data)])
+          //  .query(&[("wg_app_hash", &self.application_hash)])
             .header("Accept", "application/json")
             .header("Content-Type", "application/json");
 
