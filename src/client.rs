@@ -66,7 +66,7 @@ impl Client {
             .client
             .get(url)
           //  .query(&[("wg_variables", data)])
-          //  .query(&[("wg_app_hash", &self.application_hash)])
+            .query(&[("wg_app_hash", &self.application_hash)])
             .header("Accept", "application/json")
             .header("Content-Type", "application/json");
 
